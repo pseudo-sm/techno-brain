@@ -19,7 +19,7 @@ function p(quiz) {
                 $("#next").attr("disabled", false);
                 $("#qid").html(quiz.JS[this.currentque].id + '.');
 
-                $("#question").html(quiz.JS[this.currentque].question);
+                $("#question").html("<pre>" + quiz.JS[this.currentque].question + "</pre>");
                 $("#question-options").html("");
                 for (var key in quiz.JS[this.currentque].options[0]) {
                     if (quiz.JS[this.currentque].options[0].hasOwnProperty(key)) {
