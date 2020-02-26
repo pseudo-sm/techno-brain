@@ -1,0 +1,88 @@
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+</head>
+
+<body>
+
+    <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" style="margin-top:150px;" role="dialog">
+        <div class="modal-dialog modal-lg">
+        
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4 class="modal-title">Your Details</h4>
+            </div>
+            <div class="modal-body">
+            Name : <input type="text" id="name" class="form-control"><br>
+            Registration Number  : <input id="reg" type="text" class="form-control">
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="start" class="btn btn-default" >Start Exam</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        $("#start").click(function(){
+            name = $("#name").val();
+            reg = $("#reg").val();
+           $.ajax({
+        url: "/start-exam/",
+        data : {
+            "name" : name,
+            "reg" :reg
+        },
+        success: function (result) {
+            $('#myModal').modal('toggle');
+        }
+    });
+            
+        });
+    </script>
+    
+    </div>
+
+    <header class="header bg-primary">
+      
+      <div class="left-title">JS Quiz</div>
+      <div class="right-title">Total Questions: <span id="tque"></span></div>
+      <div class="clearfix"></div>
+    </header>
+<div class="content">
+<div class="container-fluid">
+	
+	<div class="row">
+		<div class="col-sm-12">
+        	<div id="result" class="quiz-body">
+            <form name="quizForm" onSubmit="">
+            	<fieldset class="form-group">
+    			<h4><span id="qid">1.</span> <span id="question"></span></h4>
+                
+                <div class="option-block-container" id="question-options">
+                  
+                 </div> <!-- End of option block -->
+                 </fieldset>
+                 <button  name="previous" id="previous" class="btn btn-success">Previous</button>
+                 &nbsp;
+                 <button  name="next" id="next" class="btn btn-success">Next</button>
+           </form>
+           </div>
+        </div> <!-- End of col-sm-12 -->
+        
+    </div> <!-- End of row -->
+</div> <!-- ENd of container fluid -->
+</div> <!-- End of content -->
+
+</body>
+    <script src="{% static 'index.js' %}"></script>
+    <script>
+    get_question("{{round}}");
+    </script>
+</html>
